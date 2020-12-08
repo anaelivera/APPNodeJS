@@ -1,0 +1,62 @@
+
+ <%- include('Partes/_header'); %> <!--Llama al header-->
+
+
+    <div class="container">
+        <div>
+            <!--Formulario-->
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card body">
+                    <form action="/add" method="POST">
+                        <div class="form-group">
+                            <input type="text" name="nombre" placeholder="Nombre del contacto" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="email" placeholder="Correo electrónico" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" name="telefono" placeholder="Teléfono" class="form-control">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Agregar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br>
+
+        <!--Lista-->
+        <div class="col-md-7">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>N°</th>
+                        <th>Nombre</th>
+                        <th>Email</th>
+                        <th>Telefono</th>
+                        <th>Accion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% for(var i= 0; i < nuevo.length; i++) { %>
+                       <tr>
+                           <td><%= i + 1 %></td>
+                           <td><%= nuevo[i].nombre %></td>
+                           <td><%= nuevo[i].email %></td>
+                           <td><%= nuevo[i].telefono %></td>
+                           <td><a href="/delete/<%= nuevo[i]._id %>" class="btn btn-danger">Eliminar</a>
+                               <a href="/edit/<%= nuevo[i]._id %>" class="btn btn-info">Editar</a>
+                            </td>
+                       </tr>
+
+                    <% } %>
+                </tbody>
+
+            </table>
+            
+        </div>
+        </div>     
+    </div>
+
+<%- include('Partes/_footer'); %> <!--Llama al footer-->
+

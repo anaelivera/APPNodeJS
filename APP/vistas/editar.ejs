@@ -1,0 +1,23 @@
+
+<%- include('Partes/_header'); %> <!--Llama al header-->
+            <!--Formulario-->
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card body">
+                    <form action="/edit/<%= task._id %>" method="POST"> 
+                        <div class="form-group">
+                            <input type="text" name="nombre" placeholder="Nombre del contacto" class="form-control" value="<%= task.nombre %>">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" name="email" placeholder="Correo electrónico" class="form-control" value="<%= task.email %>">
+                        </div>
+                        <div class="form-group">
+                            <input type="number" name="telefono" placeholder="Teléfono" class="form-control" value="<%= task.telefono %>">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Guardar cambios</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+<%- include('Partes/_footer'); %> <!--Llama al footer-->
