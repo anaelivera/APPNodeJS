@@ -1,7 +1,11 @@
+//Alumna: Anaelí Vera Ferández
+//Clase: Ingeniería y Desarrollo en la Web
+
 const path = require('path');
 const express = require('express');
 const morgan = require('morgan'); //Utilizar modulo morgan
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');//para los datos json
 
 const app = express(); //Inicializar express
 
@@ -10,8 +14,10 @@ mongoose.connect('mongodb://localhost/directorio') //Nombre de la base de datos:
 .then(db => console.log('DB connected'))
 .catch(err => console.log(err));
 
+
 // Importar rutas
 const indexRutas = require('./rutas/index'); //Importar archivo index.js en la carpeta rutas
+const AuthRutas = require('./rutas/authController'); //Importar archivo authController.js
 
 // Configuracion del servidor
 app.set('port', process.env.PORT || 3000); //Definir puerto, si no hay puerto definido, utilizar el 3000
@@ -21,9 +27,10 @@ app.set('view engine', 'ejs'); //Indica que se va a utilizar el motor de plantil
 //middlewares
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false})); //Para que el servidor entienda los datos ingresados en el formulario
+app.use(bodyParser.json());
 
 // Rutas
-app.use('/', indexRutas); //Utilizar las rutas indicadas en indexRutas
+app.use('/', indexRutas, AuthRutas); //Utilizar las rutas indicadas en indexRutas
 
 // Inicializar servidor
 app.listen(app.get('port'), () => {
